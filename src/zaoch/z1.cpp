@@ -1,5 +1,11 @@
 #include <iostream>
 
+#ifdef DEBUG__
+    #define LOG(x) cout << x << endl
+#else 
+    #define LOG(x)
+#endif
+
 #define uint unsigned long int
 
 using namespace std;
@@ -14,14 +20,14 @@ char* toBits(uint value){
 }
 
 uint toInt(char* bits){
-    uint mul = 1;
-    uint res = 0;
-    for (int i = 0; i < 16; i++) {
-        if(bits[i] == 1){
-            res += mul;
-        }
-        mul *= 2;
+    uint res = 0u;
+    for (int i = 15; i >= 0; i--) {
+        res *= 2;
+        res += (uint)bits[i];
+        LOG("i: " << i << " res: " << res << " bits[i]: " << (uint)bits[i]);
     }
+    LOG("toInt complete: " << res);
+    return res;
 }
 
 int main(){
@@ -33,12 +39,33 @@ int main(){
     }
     for (int i = 0; i < n; i++) {
         uint val = input[i];
+        LOG("processing input: " << val);
         char* bits = toBits(val);
+        
+        #ifdef DEBUG__
+        cout << "bits: ";
+        for (int j = 15; j >= 0; j--) {
+            cout << (uint)bits[j];
+        }
+        cout << endl;
+        #endif
+        
         char* bitsReversed = new char[16];
         for (int j = 0; j < 16; j++) {
             bitsReversed[j] = bits[15 - j];
         }
+        
+        #ifdef DEBUG__
+        cout << "bits reversed: ";
+        for (int j = 15; j >= 0; j--) {
+            cout << (uint)bitsReversed[j];
+        }
+        cout << endl;
+        #endif
+        
         cout << toInt(bitsReversed) << endl;
+        delete[] bits;
+        delete[] bitsReversed;
     }
     return 0;
 }
