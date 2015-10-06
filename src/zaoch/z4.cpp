@@ -17,10 +17,7 @@ int main(){
         d = dl;
         m++;
         dl -= (days[m - 1] + ((m == 2 && v) ? 1 : 0));
-        cout << m << ' ' << dl << ' ' << (days[m - 1] + ((m == 2 && v) ? 1 : 0)) << endl;
     } while(dl > 0 && m < 12);
-    
-    cout << v << endl;
     
     cout << setfill('0');
     cout << setw(2) << d;
