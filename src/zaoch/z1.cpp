@@ -1,4 +1,5 @@
-#include <iostream>
+#include <ifstream>
+#include <ofstream>
 
 #ifdef DEBUG__
     #define LOG(x) cout << x << endl
