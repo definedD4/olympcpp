@@ -8,6 +8,9 @@
 
 #define uint unsigned long int
 
+#define cin fin
+#define cout fout
+
 using namespace std;
 
 char* toBits(uint value){
@@ -31,6 +34,10 @@ uint toInt(char* bits){
 }
 
 int main(){
+    
+    ifstream fin("Input.txt");
+    ofstream fout("Output.txt");
+    
     int n;
     cin >> n;
     uint* input = new uint[n];
@@ -67,5 +74,8 @@ int main(){
         delete[] bits;
         delete[] bitsReversed;
     }
+    
+    fin.close();
+    fout.close();
     return 0;
 }
